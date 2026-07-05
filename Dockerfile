@@ -2,16 +2,15 @@ FROM python:3.11-slim
 
 WORKDIR /code
 
+# تحميل المكتبات أولاً
 COPY ./requirements.txt /code/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
-RUN mkdir -p /code/app
-
-COPY ./main.py /code/app/main.py
-COPY ./database.py /code/app/database.py
-
+# نسخ كافة الملفات مباشرة في المجلد الرئيسي دون تفريع
 COPY . /code/
 
+# فتح المنفذ الخاص بـ Hugging Face
 EXPOSE 7860
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "7860"]
+# أمر التشغيل المباشر لملف main.py
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "7860"]
