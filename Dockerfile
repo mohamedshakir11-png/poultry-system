@@ -12,6 +12,6 @@ COPY ./database.py /code/app/database.py
 
 COPY . /code/
 
-EXPOSE 8000
+EXPOSE 7860
 
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "7860"]
